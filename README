@@ -1,0 +1,38 @@
+Command-line TODO management
+
+todo
+  List all todo items.
+
+todo Write a program
+todo "Write a program"
+  Add todo item.
+
+todo f a3
+todo fi a3
+todo finish a3
+  Finish todo item a3.
+
+todo r c4
+todo rm c4
+todo remove c4
+  Remove todo item c4.
+
+todo a4
+  Show content of todo item a4.
+
+todo b3 "new todo content"
+  Change todo item b3.
+
+todo gist https://gist.github.com/12345
+  Prepare for uploading to gist.
+
+todo u
+todo up
+todo update
+  Update todo items from gist.
+
+todo c
+todo cm
+todo commit
+  Update todo items to gist.
+
