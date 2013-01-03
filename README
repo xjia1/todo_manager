@@ -7,15 +7,10 @@ todo Write a program
 todo "Write a program"
   Add todo item.
 
-todo f a3
-todo fi a3
-todo finish a3
-  Finish todo item a3.
-
 todo r c4
 todo rm c4
 todo remove c4
-  Remove todo item c4.
+  Remove todo item c4. There's no "finish a todo item".
 
 todo a4
   Show content of todo item a4.
