@@ -3,6 +3,11 @@ Command-line TODO management
 todo
   List all todo items.
 
+todo -h
+todo --help
+todo help
+  Print help message.
+
 todo Write a program
 todo "Write a program"
   Add todo item.
