@@ -29,6 +29,7 @@ class TodoManager
     FileUtils.touch todos_path
     @todos = YAML.load(File.read(todos_path)) || []
     @todos = @todos.collect {|t| Todo.new(t[:id], t[:text]) }
+    @todos.sort! {|x,y| x.id <=> y.id }
   end
 
   def help
