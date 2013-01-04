@@ -77,7 +77,7 @@ class TodoManager
   def update
     open_gist do |gist|
       if yesno "Overwrite #{todos_path}?"
-        move :from => gist_todo, :to => todos_path
+        copy :from => gist_todo, :to => todos_path
       end
     end
   end
@@ -85,7 +85,7 @@ class TodoManager
   def commit
     open_gist do |gist|
       if yesno "Override #{gist}/#{gist_todo}?"
-        move :from => todos_path, :to => gist_todo
+        copy :from => todos_path, :to => gist_todo
         `git add .`
         `git commit -m 'update'`
         `git push -f origin master`
@@ -108,9 +108,9 @@ protected
     'todo.yaml'
   end
 
-  def move opts={}
+  def copy opts={}
     FileUtils.touch opts[:from]
-    FileUtils.mv opts[:from], opts[:to], :force => true
+    FileUtils.cp opts[:from], opts[:to]
   end
 
   # Handy yes/no prompt for little Ruby scripts
