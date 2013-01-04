@@ -5,47 +5,6 @@ require 'tmpdir'
 require 'yaml'
 require 'highline/import'
 
-HELP = <<HELP
-Command-line TODO management
-
-todo
-  List all todo items.
-
-todo -h
-todo --help
-todo help
-  Print help message.
-
-todo Write a program
-todo "Write a program"
-  Add todo item.
-
-todo r c4
-todo rm c4
-todo remove c4
-  Remove todo item c4. There's no "finish a todo item".
-
-todo a4
-  Show content of todo item a4.
-
-todo b3 new todo content
-todo b3 "new todo content"
-  Change todo item b3.
-
-todo gist https://gist.github.com/12345
-  Prepare for uploading to gist.
-
-todo u
-todo up
-todo update
-  Update todo items from gist.
-
-todo c
-todo cm
-todo commit
-  Update todo items to gist.
-HELP
-
 class TodoManager
 
   class Todo
@@ -73,7 +32,7 @@ class TodoManager
   end
 
   def help
-    puts HELP
+    puts File.read(File.expand_path(File.dirname(__FILE__)) + '/README')
   end
 
   def list
