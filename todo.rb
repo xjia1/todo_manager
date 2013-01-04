@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
+require 'tmpdir'
 require 'yaml'
+require 'highline/import'
 
 HELP = <<HELP
 Command-line TODO management
@@ -66,7 +68,7 @@ class TodoManager
 
   def initialize
     FileUtils.touch todos_path
-    @todos = YAML::load(File.read(todos_path)) || []
+    @todos = YAML.load(File.read(todos_path)) || []
     @todos = @todos.collect {|t| Todo.new(t[:id], t[:text]) }
   end
 
@@ -103,20 +105,66 @@ class TodoManager
     save_todos
   end
 
-  def prepare gist
-    File.open(todorc, 'w') {|f| f.write ({:gist => gist}).to_yaml }
+  def prepare gist=nil
+    if gist
+      File.open(todorc, 'w') {|f| f.write({:gist => gist}.to_yaml) }
+    else
+      rc = load_todorc
+      puts rc[:gist]
+    end
   end
 
   def update
-    load_todorc
-    Dir.mktmpdir {|dir| puts dir }
+    open_gist do |gist|
+      if yesno "Overwrite #{todos_path}?"
+        move :from => gist_todo, :to => todos_path
+      end
+    end
   end
 
   def commit
-    puts "commit"
+    open_gist do |gist|
+      if yesno "Override #{gist}/#{gist_todo}?"
+        move :from => todos_path, :to => gist_todo
+        `git add .`
+        `git commit -m 'update'`
+        `git push -f origin master`
+      end
+    end
   end
 
 protected
+  def open_gist
+    rc = load_todorc
+    Dir.mktmpdir do |dir|
+      Dir.chdir(dir) do
+        `git clone #{rc[:gist]} .`
+        yield rc[:gist]
+      end
+    end
+  end
+
+  def gist_todo
+    'todo.yaml'
+  end
+
+  def move opts={}
+    FileUtils.touch opts[:from]
+    FileUtils.mv opts[:from], opts[:to], :force => true
+  end
+
+  # Handy yes/no prompt for little Ruby scripts
+  def yesno prompt, default=true
+    s = default ? '[Y/n]' : '[y/N]'
+    d = default ? 'y' : 'n'
+    a = ''
+    until %w[y n].include? a
+      a = ask("#{prompt} #{s} ") {|q| q.limit = 1; q.case = :downcase }
+      a = d if a.length == 0
+    end
+    a == 'y'
+  end
+
   def todos_path
     File.expand_path('~/.todo')
   end
@@ -127,7 +175,7 @@ protected
 
   def load_todorc
     FileUtils.touch todorc
-    @todorc = YAML::load(File.read(todorc)) || {}
+    YAML.load(File.read(todorc)) || {}
   end
 
   def save_todos
