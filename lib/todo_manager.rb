@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require 'fileutils'
 require 'tmpdir'
 require 'yaml'
@@ -33,7 +31,7 @@ class TodoManager
   end
 
   def help
-    puts File.read(File.expand_path(File.dirname(__FILE__)) + '/README')
+    puts File.read(File.expand_path(File.dirname(__FILE__)) + '/../README')
   end
 
   def list
@@ -155,40 +153,3 @@ protected
     @todos.select {|todo| todo.id == id }
   end
 end
-
-commands = {
-  :'-h'     => :help,
-  :'--help' => :help,
-  :help     => :help,
-  :r      => :remove,
-  :rm     => :remove,
-  :remove => :remove,
-  :gist   => :prepare,
-  :u      => :update,
-  :up     => :update,
-  :update => :update,
-  :c      => :commit,
-  :cm     => :commit,
-  :commit => :commit
-}
-
-tm = TodoManager.new
-
-if ARGV.length == 0
-  tm.list
-elsif ARGV.length == 1 and tm.is_todo_id? ARGV.first
-  tm.show ARGV.first
-elsif ARGV.length >= 1 and cmd = commands[ARGV.first.to_sym] and tm.respond_to? cmd
-  if ARGV.length == 1
-    tm.send cmd
-  else
-    tm.send cmd, ARGV[1..-1].join(" ")
-  end
-else
-  if tm.is_todo_id? ARGV.first
-    tm.edit ARGV.first, ARGV[1..-1].join(" ")
-  else
-    tm.add ARGV.join(" ")
-  end
-end
-
