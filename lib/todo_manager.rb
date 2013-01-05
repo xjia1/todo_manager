@@ -31,7 +31,18 @@ class TodoManager
   end
 
   def help
-    puts File.read(File.expand_path(File.dirname(__FILE__)) + '/../README')
+    puts usage = <<USAGE
+Usage:
+  t --help              Print this help message; also: `-h` or `help`
+  t                     List all todo items stored in $HOME/.todo
+  t "todo content"      Add todo item
+  t a4                  Show content of todo item a4
+  t b3 "new content"    Change todo item b3
+  t remove c4           Finish (or cancel) todo item c4; also: `r` or `rm`
+  t gist <URL>          Set an existing gist URL (stored in $HOME/.todorc)
+  t update              Update todo items from gist; also: `u` or `up`
+  t commit              pdate todo items to gist; also: `c` or `cm`
+USAGE
   end
 
   def list

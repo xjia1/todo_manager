@@ -1,58 +1,16 @@
-Command-line TODO management
+Todo manager with a command-line interface
 
-Author: Xiao Jia
-Contact: me@xiao-jia.com
-License: See LICENSE file
+Author: Xiao Jia <me@xiao-jia.com>
 
 Dependency:
     ruby (mandatory; please install it using https://rvm.io if possible)
-      gem install highline
     git  (optional if you don't need to upload TODOs to gist)
 
 Installation:
-    git clone git://github.com/stfairy/todo
-    alias todo=`pwd`/todo/todo.rb
+    gem install highline
+    gem install todo_manager
+    # Personally, I also make an alias for the executable:
+    alias t=todo_manager
 
 Usage:
-    todo
-      List all todo items
-      They're stored in $HOME/.todo
-    
-    todo -h
-    todo --help
-    todo help
-      Print help message
-    
-    todo Write a program
-    todo "Write a program"
-      Add todo item
-    
-    todo r c4
-    todo rm c4
-    todo remove c4
-      Remove todo item c4
-      There's no "finish a todo item"
-    
-    todo a4
-      Show content of todo item a4
-    
-    todo b3 new todo content
-    todo b3 "new todo content"
-      Change todo item b3
-    
-    todo gist https://gist.github.com/12345.git
-      Prepare for uploading to gist
-      You have to log into gist.github.com to create one beforehand
-      Create a private gist if you don't want to share it with others
-      Gist URL is stored in $HOME/.todorc
-    
-    todo u
-    todo up
-    todo update
-      Update todo items from gist
-    
-    todo c
-    todo cm
-    todo commit
-      Update todo items to gist
-
+    todo_manager --help
