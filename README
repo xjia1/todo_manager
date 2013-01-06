@@ -7,9 +7,9 @@ Dependency:
     git  (optional if you don't need to upload TODOs to gist)
 
 Installation:
-    gem install highline
     gem install todo_manager
-    # Personally, I also make an alias for the executable:
+
+Personally, I also make an alias for the executable:
     alias t=todo_manager
 
 Usage:
