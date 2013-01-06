@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'todo_manager'
-  s.version     = '0.9.2'
+  s.version     = '0.9.3'
   s.date        = '2013-01-06'
   s.summary     = 'Todo Manager'
   s.description = 'A simple todo manager gem with a command-line interface. You can also upload your todo items to a git/gist repository.'
