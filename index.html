@@ -19,7 +19,7 @@
           <a id="forkme_banner" href="https://github.com/stfairy/todo_manager">View on GitHub</a>
 
           <h1 id="project_title">Todo manager</h1>
-          <h2 id="project_tagline">A simple todo manager gem with a command-line interface. You can also upload your todo items to a git/gist repository.</h2>
+          <h2 id="project_tagline">A todo manager with a command-line interface. You can also upload your todo items to a git/gist repository.</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/stfairy/todo_manager/zipball/master">Download this project as a .zip file</a>
@@ -31,27 +31,37 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p>Todo manager with a command-line interface</p>
 
-<p>Author: Xiao Jia <a href="mailto:me@xiao-jia.com">me@xiao-jia.com</a></p>
+<p><strong>Author:</strong> <a href="http://xiao-jia.com/">Xiao Jia</a> &lt;<a href="mailto:me@xiao-jia.com">me@xiao-jia.com</a>&gt;</p>
 
-<p>Dependency:</p>
+<h3>Dependency</h3>
 
 <pre><code>ruby (mandatory; please install it using https://rvm.io if possible)
 git  (optional if you don't need to upload TODOs to gist)
 </code></pre>
 
-<p>Installation:</p>
+<h3>Installation:</h3>
 
 <pre><code>gem install highline
 gem install todo_manager
-# Personally, I also make an alias for the executable:
-alias t=todo_manager
 </code></pre>
 
-<p>Usage:</p>
+<p>Personally, I also make an alias for the executable:</p>
 
-<pre><code>todo_manager --help
+<pre><code>alias t=todo_manager
+</code></pre>
+
+<h3>Usage</h3>
+
+<pre><code>t --help              Print the help message; also: `-h` or `help`
+t                     List all todo items stored in $HOME/.todo
+t "todo content"      Add todo item
+t a4                  Show content of todo item a4
+t b3 "new content"    Change todo item b3
+t remove c4           Finish (or cancel) todo item c4; also: `r` or `rm`
+t gist &lt;URL&gt;          Set an existing gist URL (stored in $HOME/.todorc)
+t update              Update todo items from gist; also: `u` or `up`
+t commit              pdate todo items to gist; also: `c` or `cm`
 </code></pre>
       </section>
     </div>
