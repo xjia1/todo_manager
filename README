@@ -14,3 +14,9 @@ Personally, I also make an alias for the executable:
 
 Usage:
     todo_manager --help
+
+Gist hint:
+    If you use a gist url like https://gist.github.com/abc123.git
+    then you have to enter your username and password every time 
+    you commit (upload) you todo items.  Change it to ssh+git to 
+    make this process easier: git@gist.github.com:abc123.git
